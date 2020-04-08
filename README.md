@@ -1,4 +1,5 @@
 # vue-style-transfer
+Easily use style transfer into your vue application
 
 ## Project setup
 ```
