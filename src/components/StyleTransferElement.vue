@@ -1,6 +1,7 @@
 <template>
     <div>
-        <canvas :id="componentId + '-styledImage'" width="400"></canvas>
+        <canvas ref="styleCanvas" width="400">
+        </canvas>
     </div>
 </template>
 <script>
@@ -10,8 +11,6 @@ tf.ENV.set('WEBGL_PACK', false);
 export default {
     data: function () {
         return {
-            // used to generate unique IDs
-            componentId: null,
             // images we will be using for the style transfer
             contentImg: null,
             styleImg: null,
@@ -21,7 +20,7 @@ export default {
             styleNet: null,
             transformNet: null,
             // default "strength" of the style transfer
-            styleRatio: 0.8
+            styleRatio: 0.1
         }
     },
     name: "StyleTransferElement",
@@ -46,7 +45,7 @@ export default {
          * https://github.com/reiinakano/arbitrary-image-stylization-tfjs/blob/5c93b212d7d3c7051a89a53667d2d5a61cd938b4/main.js
          */
         startStyling: async function() {
-            this.stylized = document.getElementById(this.componentId + '-styledImage');
+            this.stylized = this.$refs.styleCanvas;
             await tf.nextFrame();
             let bottleneck = await tf.tidy(() => { 
                 return this.styleNet.predict(tf.browser.fromPixels(this.styleImg).toFloat().div(tf.scalar(255)).expandDims());
@@ -77,8 +76,19 @@ export default {
         }
     },
     mounted() {
-        // Get the ID of this component, so we have unique IDS
-        this.componentId = this._uid;
+        var canvas = this.$refs.styleCanvas;
+        var ctx = canvas.getContext("2d");
+
+        // Set background colour
+        ctx.fillStyle = "#e8e8e8";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Set canvas "loading" text
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#666666";
+        ctx.font = "14px Arial";
+        ctx.fillText('LOADING IMAGE', canvas.width/2, canvas.height/2)
 
         /**
          * Chained promises below basically:
