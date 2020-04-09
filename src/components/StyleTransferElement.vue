@@ -1,6 +1,11 @@
 <template>
     <div>
-        <canvas ref="styleCanvas" width="400">
+        <canvas 
+            ref="styleCanvas"
+            width="400" 
+            :aria-label="altText"
+            role="img"
+            >
         </canvas>
     </div>
 </template>
@@ -9,6 +14,28 @@ import * as tf from '@tensorflow/tfjs';
 tf.ENV.set('WEBGL_PACK', false);
 
 export default {
+    props: {
+        originURL : String,
+        styleURL : String,
+        strength : {
+            type: Number,
+            default: 0.5
+        },
+        width : Number,
+        loadingBackgroundColor: {
+            type: String,
+            default: '#E8E8E8'
+        },
+        loadingTextMessage : {
+            type: String,
+            default: "LOADING IMAGE"
+        },
+        loadingTextColor: {
+            type: String,
+            default: "#666666"
+        },
+        altText: String
+    },
     data: function () {
         return {
             // images we will be using for the style transfer
@@ -20,7 +47,7 @@ export default {
             styleNet: null,
             transformNet: null,
             // default "strength" of the style transfer
-            styleRatio: 0.1
+            styleRatio: this.strength
         }
     },
     name: "StyleTransferElement",
@@ -80,15 +107,15 @@ export default {
         var ctx = canvas.getContext("2d");
 
         // Set background colour
-        ctx.fillStyle = "#e8e8e8";
+        ctx.fillStyle = this.loadingBackgroundColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Set canvas "loading" text
         ctx.textBaseline = 'middle';
         ctx.textAlign = "center";
-        ctx.fillStyle = "#666666";
+        ctx.fillStyle = this.loadingTextColor;
         ctx.font = "14px Arial";
-        ctx.fillText('LOADING IMAGE', canvas.width/2, canvas.height/2)
+        ctx.fillText(this.loadingTextMessage, canvas.width/2, canvas.height/2)
 
         /**
          * Chained promises below basically:
