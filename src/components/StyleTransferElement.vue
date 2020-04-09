@@ -1,5 +1,5 @@
 <template>
-    <div class="style-transfer-container">
+    <div>
         <canvas ref="styleCanvas" width="400">
         </canvas>
     </div>
@@ -74,8 +74,6 @@ export default {
             bottleneck.dispose();  // Might wanna keep this around
             stylized.dispose();
         }
-    },
-    created() {
     },
     mounted() {
         var canvas = this.$refs.styleCanvas;
