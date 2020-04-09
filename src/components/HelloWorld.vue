@@ -5,7 +5,7 @@
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
-    <h1>The actual Component</h1>
+    <h1>The Actual Component</h1>
     <style-transfer-element>
     </style-transfer-element>
     <h3>Installed CLI Plugins</h3>
