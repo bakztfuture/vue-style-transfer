@@ -16,8 +16,14 @@ tf.ENV.set('WEBGL_PACK', false);
 
 export default {
     props: {
-        originURL : String,
-        styleURL : String,
+        originURL : {
+            type: String,
+            required: true
+        },
+        styleURL : {
+            type: String,
+            required: true
+        },
         strength : {
             type: Number,
             default: 0.5
@@ -139,14 +145,14 @@ export default {
             // Initialize images
             const img1 = new Image();
             img1.crossOrigin = "anonymous";
-            img1.src = 'http://i.imgur.com/Jm3bQtu.jpg';
+            img1.src = that.originURL;
             img1.width = that.width;
             img1.height = that.height;
             that.contentImg = img1;
 
             const img2 = new Image();
             img2.crossOrigin = "anonymous";
-            img2.src = 'http://i.imgur.com/osSv3S2.jpg';
+            img2.src = that.styleURL;
             img2.width = that.width;
             img2.height = that.height;
             that.styleImg = img2;

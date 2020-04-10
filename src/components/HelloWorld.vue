@@ -10,6 +10,8 @@
       width="400"
       height="400"
       alt-text="Space force crossed with Starry Night"
+      originURL="http://i.imgur.com/Jm3bQtu.jpg"
+      styleURL="http://i.imgur.com/osSv3S2.jpg"
       :strength="0.1"
       >
     </style-transfer-element>
