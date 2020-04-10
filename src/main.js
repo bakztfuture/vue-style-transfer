@@ -1,8 +1,9 @@
-import Vue from 'vue'
-import App from './App.vue'
+import styleTransferElement from './components/StyleTransferElement';
 
-Vue.config.productionTip = false
+const VueStyleTransfer = {
+  install (Vue) {
+    Vue.component(styleTransferElement.name, styleTransferElement)
+  }
+}
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+export default VueStyleTransfer
