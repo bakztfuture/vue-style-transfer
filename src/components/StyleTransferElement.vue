@@ -1,6 +1,12 @@
 <template>
     <div>
-        <canvas ref="styleCanvas" width="400">
+        <canvas 
+            ref="styleCanvas"
+            :width="width" 
+            :height="height"
+            :aria-label="altText"
+            role="img"
+            >
         </canvas>
     </div>
 </template>
@@ -9,6 +15,44 @@ import * as tf from '@tensorflow/tfjs';
 tf.ENV.set('WEBGL_PACK', false);
 
 export default {
+    props: {
+        originURL : {
+            type: String,
+            required: true
+        },
+        styleURL : {
+            type: String,
+            required: true
+        },
+        strength : {
+            type: Number,
+            default: 0.5
+        },
+        width : {
+            Type: Number,
+            default: 400
+        },
+        height : {
+            Type: Number,
+            default: 400
+        },
+        loadingBackgroundColor: {
+            type: String,
+            default: '#E8E8E8'
+        },
+        loadingTextMessage : {
+            type: String,
+            default: "LOADING IMAGE"
+        },
+        loadingTextColor: {
+            type: String,
+            default: "#666666"
+        },
+        altText: {
+            type: String,
+            default: ''
+        }
+    },
     data: function () {
         return {
             // images we will be using for the style transfer
@@ -20,7 +64,7 @@ export default {
             styleNet: null,
             transformNet: null,
             // default "strength" of the style transfer
-            styleRatio: 0.1
+            styleRatio: this.strength
         }
     },
     name: "StyleTransferElement",
@@ -80,15 +124,15 @@ export default {
         var ctx = canvas.getContext("2d");
 
         // Set background colour
-        ctx.fillStyle = "#e8e8e8";
+        ctx.fillStyle = this.loadingBackgroundColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Set canvas "loading" text
         ctx.textBaseline = 'middle';
         ctx.textAlign = "center";
-        ctx.fillStyle = "#666666";
+        ctx.fillStyle = this.loadingTextColor;
         ctx.font = "14px Arial";
-        ctx.fillText('LOADING IMAGE', canvas.width/2, canvas.height/2)
+        ctx.fillText(this.loadingTextMessage, canvas.width/2, canvas.height/2)
 
         /**
          * Chained promises below basically:
@@ -101,16 +145,16 @@ export default {
             // Initialize images
             const img1 = new Image();
             img1.crossOrigin = "anonymous";
-            img1.src = 'http://i.imgur.com/Jm3bQtu.jpg';
-            img1.width = 400;
-            img1.height = 400;
+            img1.src = that.originURL;
+            img1.width = that.width;
+            img1.height = that.height;
             that.contentImg = img1;
 
             const img2 = new Image();
             img2.crossOrigin = "anonymous";
-            img2.src = 'http://i.imgur.com/osSv3S2.jpg';
-            img2.width = 400;
-            img2.height = 400;
+            img2.src = that.styleURL;
+            img2.width = that.width;
+            img2.height = that.height;
             that.styleImg = img2;
 
             resolve(1);
