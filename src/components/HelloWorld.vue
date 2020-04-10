@@ -6,7 +6,12 @@
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
     <h1>The Actual Component</h1>
-    <style-transfer-element>
+    <style-transfer-element
+      width="400"
+      height="400"
+      alt-text="Space force crossed with Starry Night"
+      :strength="0.1"
+      >
     </style-transfer-element>
     <h3>Installed CLI Plugins</h3>
     <ul>

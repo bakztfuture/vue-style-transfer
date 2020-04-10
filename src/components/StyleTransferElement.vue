@@ -2,7 +2,8 @@
     <div>
         <canvas 
             ref="styleCanvas"
-            width="400" 
+            :width="width" 
+            :height="height"
             :aria-label="altText"
             role="img"
             >
@@ -21,7 +22,14 @@ export default {
             type: Number,
             default: 0.5
         },
-        width : Number,
+        width : {
+            Type: Number,
+            default: 400
+        },
+        height : {
+            Type: Number,
+            default: 400
+        },
         loadingBackgroundColor: {
             type: String,
             default: '#E8E8E8'
@@ -34,7 +42,10 @@ export default {
             type: String,
             default: "#666666"
         },
-        altText: String
+        altText: {
+            type: String,
+            default: ''
+        }
     },
     data: function () {
         return {
@@ -129,15 +140,15 @@ export default {
             const img1 = new Image();
             img1.crossOrigin = "anonymous";
             img1.src = 'http://i.imgur.com/Jm3bQtu.jpg';
-            img1.width = 400;
-            img1.height = 400;
+            img1.width = that.width;
+            img1.height = that.height;
             that.contentImg = img1;
 
             const img2 = new Image();
             img2.crossOrigin = "anonymous";
             img2.src = 'http://i.imgur.com/osSv3S2.jpg';
-            img2.width = 400;
-            img2.height = 400;
+            img2.width = that.width;
+            img2.height = that.height;
             that.styleImg = img2;
 
             resolve(1);
