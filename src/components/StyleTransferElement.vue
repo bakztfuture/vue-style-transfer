@@ -18,11 +18,19 @@ export default {
     props: {
         originURL : {
             type: String,
-            required: true
+            default: null
         },
         styleURL : {
             type: String,
-            required: true
+            default: null
+        },
+        localOriginImage : {
+            type: String,
+            default: null
+        },
+        localStyleImage : {
+            type: String,
+            default: null
         },
         strength : {
             type: Number,
@@ -142,20 +150,43 @@ export default {
          */
         let that = this;
         new Promise(function(resolve) {
-            // Initialize images
-            const img1 = new Image();
-            img1.crossOrigin = "anonymous";
-            img1.src = that.originURL;
-            img1.width = that.width;
-            img1.height = that.height;
-            that.contentImg = img1;
-
-            const img2 = new Image();
-            img2.crossOrigin = "anonymous";
-            img2.src = that.styleURL;
-            img2.width = that.width;
-            img2.height = that.height;
-            that.styleImg = img2;
+            // Initialize origin image
+            if(that.originURL !== null){
+                const img1 = new Image();
+                img1.crossOrigin = "anonymous";
+                img1.src = that.originURL;
+                img1.width = that.width;
+                img1.height = that.height;
+                that.contentImg = img1;
+            }else if(that.localOriginImage !== null){
+                const img1 = new Image();
+                img1.crossOrigin = "anonymous";
+                img1.src = that.localOriginImage;
+                img1.width = that.width;
+                img1.height = that.height;
+                that.contentImg = img1;
+            }else{
+                throw new TypeError("Please enter either a valid origin image URL or a local image file")
+            }
+            
+            // Initialize style image
+            if(that.styleURL !== null){
+                const img2 = new Image();
+                img2.crossOrigin = "anonymous";
+                img2.src = that.styleURL;
+                img2.width = that.width;
+                img2.height = that.height;
+                that.styleImg = img2;
+            }else if(that.localStyleImage !== null){
+                const img2 = new Image();
+                img2.crossOrigin = "anonymous";
+                img2.src = that.localStyleImage;
+                img2.width = that.width;
+                img2.height = that.height;
+                that.styleImg = img2;
+            }else{
+                throw new TypeError("Please enter either a valid style image URL or a local image file")
+            }
 
             resolve(1);
 
