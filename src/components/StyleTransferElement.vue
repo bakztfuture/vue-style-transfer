@@ -72,7 +72,9 @@ export default {
             styleNet: null,
             transformNet: null,
             // default "strength" of the style transfer
-            styleRatio: this.strength
+            styleRatio: this.strength,
+            // track if style transfer is complete or not
+            stylingComplete: false
         }
     },
     name: "StyleTransferElement",
@@ -127,21 +129,7 @@ export default {
             stylized.dispose();
         }
     },
-    mounted() {
-        var canvas = this.$refs.styleCanvas;
-        var ctx = canvas.getContext("2d");
-
-        // Set background colour
-        ctx.fillStyle = this.loadingBackgroundColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Set canvas "loading" text
-        ctx.textBaseline = 'middle';
-        ctx.textAlign = "center";
-        ctx.fillStyle = this.loadingTextColor;
-        ctx.font = "14px Arial";
-        ctx.fillText(this.loadingTextMessage, canvas.width/2, canvas.height/2)
-
+    created() {
         /**
          * Chained promises below basically:
          * 1. Make sure the images are loaded completely from URL with cross origin in mind
@@ -200,8 +188,29 @@ export default {
                 that.transformNet = transformNet;
                 // Start the styling process
                 that.startStyling();
+                that.stylingComplete = true;
             });
         });
+    },
+    mounted() {
+        /**
+         * Set a default background color and message on the canvas if style transfer isn't complete yet
+         */
+        var canvas = this.$refs.styleCanvas;
+        var ctx = canvas.getContext("2d");
+
+        if(this.stylingComplete === false){
+            // Set background colour
+            ctx.fillStyle = this.loadingBackgroundColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Set canvas "loading" text
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = "center";
+            ctx.fillStyle = this.loadingTextColor;
+            ctx.font = "14px Arial";
+            ctx.fillText(this.loadingTextMessage, canvas.width/2, canvas.height/2)
+        }
     },
 }
 </script>
