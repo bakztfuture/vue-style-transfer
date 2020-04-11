@@ -2,9 +2,11 @@
 Easily use Style Transfer in your Vue Application
 
 
-![Style transfer demo - Vue logo crossed with Starry Night by Vincent van Gogh](vue-style-transfer-demo-optimized.gif)
+![Style transfer demo - Vue logo crossed with Starry Night by Vincent van Gogh](https://i.imgur.com/MPjGcOe.gif)
 
 Style transfer demo - Vue logo crossed with Starry Night by Vincent van Gogh
+
+![Style transfer explained](https://i.imgur.com/5CAIMbC.png)
 
 ## Philosophy
 Lately, Style Transfer models have improved in their results and also decreased in size (down to a few KB).  At the same time, users' machines and devices have also become more powerful, and for the first time, able to perform style transfer computations on-the-fly. 
