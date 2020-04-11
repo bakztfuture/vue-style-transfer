@@ -1,6 +1,6 @@
 {
   "name": "vue-style-transfer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "description": "Easily use Style Transfer in your Vue Application",
   "author": "Bakz T. Future <bakztfuture@gmail.com>",
