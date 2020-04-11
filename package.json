@@ -1,12 +1,30 @@
 {
   "name": "vue-style-transfer",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.8",
+  "private": false,
+  "description": "Easily use Style Transfer in your Vue Application",
+  "author": "Bakz T. Future <bakztfuture@gmail.com>",
+  "license": "Apache-2.0",
+  "main": "dist/vue-style-transfer.common.js",
+  "module": "dist/vue-style-transfer.umd.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bakztfuture/vue-style-transfer.git"
+  },
+  "keywords": [
+    "vue",
+    "style transfer",
+    "arbitrary style transfer",
+    "image stylization"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib src/main.js",
     "lint": "vue-cli-service lint"
   },
+  "files": [
+    "dist/*"
+  ],
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.2",
     "core-js": "^3.6.4",

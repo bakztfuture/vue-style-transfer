@@ -7,3 +7,7 @@ const VueStyleTransfer = {
 }
 
 export default VueStyleTransfer
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(VueStyleTransfer)
+}

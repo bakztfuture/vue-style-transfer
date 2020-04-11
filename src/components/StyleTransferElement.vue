@@ -15,6 +15,7 @@ import * as tf from '@tensorflow/tfjs';
 tf.ENV.set('WEBGL_PACK', false);
 
 export default {
+    name: "style-transfer-element",
     props: {
         originURL : {
             type: String,
@@ -77,7 +78,6 @@ export default {
             stylingComplete: false
         }
     },
-    name: "StyleTransferElement",
     methods: {
         // Load TensorFlow Model for transformer (151 KB)
         loadSeparableTransformerModel: async function() {
