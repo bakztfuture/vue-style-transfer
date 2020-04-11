@@ -3,6 +3,7 @@ Easily use Style Transfer in your Vue Application
 
 
 ![Style transfer demo - Vue logo crossed with Starry Night by Vincent van Gogh](vue-style-transfer-demo-optimized.gif)
+
 Style transfer demo - Vue logo crossed with Starry Night by Vincent van Gogh
 
 ## Philosophy
@@ -89,7 +90,7 @@ Basic example (using a local origin image + URL for the style image):
 
 `loading-text-color` - specify a hex value for the loading (by default it's dark grey `#666666`)
 
-## Arbitrary Style Transfer Model
+## About the Arbitrary Style Transfer Neural Network Model
 Tensorflow.js Model taken from the [arbitrary-image-stylization-tfjs](https://github.com/reiinakano/arbitrary-image-stylization-tfjs) project.
 
 Parts of the model which are called:
@@ -107,7 +108,7 @@ It is **not recommended** to use this library in the main areas of critical, pro
 It is **not recommended** to use multiple style transfer elements on the same page.
 
 ## Credits
-Please note the code is **very** heavily inspired from the original [Arbitrary Style Transfer code](https://github.com/reiinakano/arbitrary-image-stylization-tfjs) using Tensorflow.js by Reiichiro Nakano.  It's worth noting `vue-style-transfer` is more of a Vue wrapper for the original code by Reiichiro Nakano.
+Please note the code is **very** heavily inspired from the original [Arbitrary Style Transfer code](https://github.com/reiinakano/arbitrary-image-stylization-tfjs) using Tensorflow.js by Reiichiro Nakano.  It's worth noting `vue-style-transfer` is more of a Vue wrapper for the original code by Reiichiro Nakano, than its own library.
 
 Arbitrary Style Transfer itself would not have been possible without the following:
 * Authors of the [arbitrary style transfer](https://arxiv.org/abs/1705.06830) paper.
